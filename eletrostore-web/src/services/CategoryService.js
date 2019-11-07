@@ -8,7 +8,9 @@ class CategoryService {
     retrieveAll() {
         return axios.get(`${CATEGORY_API_URL}`);
     }
-    
+    retrieveById(id) {
+        return axios.get(`${CATEGORY_API_URL}/${id}`);
+    }
     deleteById(id) {
         return axios.delete(`${CATEGORY_API_URL}/${id}`);
     }

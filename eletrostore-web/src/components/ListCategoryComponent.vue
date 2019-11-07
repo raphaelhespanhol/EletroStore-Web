@@ -4,6 +4,9 @@
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
+    <div class="row">
+        <button class="btn btn-success" v-on:click="newCategoryByClick()">Novo</button>
+    </div>
     <div class="container">
       <table class="table">
         <thead>
@@ -11,6 +14,7 @@
             <th>Código</th>
             <th>Descrição</th>
             <th>Data alteração</th>
+            <th>Atualizar</th>
             <th>Remover</th>
           </tr>
         </thead>
@@ -19,13 +23,8 @@
             <td>{{category.id}}</td>
             <td>{{category.name}}</td>
             <td>{{category.lastUpdate}}</td>
-            <td>
-              <button 
-                class="btn btn-warning" 
-                v-on:click="deleteCategoryByClick(category.id)">
-                Remover
-              </button>
-            </td>
+            <td><button class="btn btn-success" v-on:click="saveCategoryByClick(category.id)">Atualizar</button></td>
+            <td><button class="btn btn-warning" v-on:click="deleteCategoryByClick(category.id)">Remover</button></td>
           </tr>
         </tbody>
       </table>
@@ -49,6 +48,12 @@ export default {
         .then(response => {
           this.categories = response.data;
         });
+    },
+    newCategoryByClick() {
+      this.$router.push(`/categories/-1`);
+    },
+    saveCategoryByClick(id) {
+      this.$router.push(`/categories/${id}`);
     },
     deleteCategoryByClick(id) {
       CategoryService.deleteById(id)

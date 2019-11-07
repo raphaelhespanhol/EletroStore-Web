@@ -1,17 +1,12 @@
 <template>
   <div id="container">
-    <CategoryComponent />
+    <router-view/>
   </div>
 </template>
 
 <script>
-import CategoryComponent from './components/CategoryComponent.vue'
-
 export default {
-  name: 'app',
-  components: {
-    CategoryComponent
-  }
+  name: 'app'
 }
 </script>
 
