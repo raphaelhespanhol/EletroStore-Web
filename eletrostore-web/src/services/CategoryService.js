@@ -8,6 +8,10 @@ class CategoryService {
     retrieveAll() {
         return axios.get(`${CATEGORY_API_URL}`);
     }
+    
+    deleteById(id) {
+        return axios.delete(`${CATEGORY_API_URL}/${id}`);
+    }
 }
 
 export default new CategoryService();

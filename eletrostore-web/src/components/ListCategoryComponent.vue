@@ -1,22 +1,31 @@
 <template>
   <div class="container">
-    <h3>All Categories</h3>
+    <h3>Todas as Categories</h3>
+    <div v-if="message" class="alert alert-success">
+      {{message}}
+    </div>
     <div class="container">
       <table class="table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Description</th>
-            <th>Last Update</th>
-            <th>Action</th>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Data alteração</th>
+            <th>Remover</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Computadores</td>
-            <td>01/01/2019</td>
-            <td>Remover</td>
+          <tr v-for="category in categories" v-bind:key="category.id">
+            <td>{{category.id}}</td>
+            <td>{{category.name}}</td>
+            <td>{{category.lastUpdate}}</td>
+            <td>
+              <button 
+                class="btn btn-warning" 
+                v-on:click="deleteCategoryByClick(category.id)">
+                Remover
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -30,15 +39,23 @@ export default {
   name: "CategoryList",
   data() {
     return {
-      APP_NAME: "EletroStore/api"
+      categories: [],
+      message: null
     };
   },
   methods: {
     refreshCategories() {
       CategoryService.retrieveAll()
         .then(response => {
-          console.log(response.data);
+          this.categories = response.data;
         });
+    },
+    deleteCategoryByClick(id) {
+      CategoryService.deleteById(id)
+        .then(response => { 
+          this.message = `Categoria numero ${id} apagada com sucesso!`;
+          this.refreshCategories();
+      });
     }
   },
   created() {
@@ -47,5 +64,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Cadastro de Categorias</h1>
         <ListCategoryComponent></ListCategoryComponent>
     </div>
 </template>
