@@ -18,7 +18,7 @@ const router = new Router({
     },
     {
       path: "/categories/:id",
-      name: "Category Details",
+      name: "CategoryDetails",
       component: () => import("./components/DetailsCategoryComponent")
     }
   ]

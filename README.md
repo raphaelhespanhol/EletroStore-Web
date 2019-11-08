@@ -1,11 +1,10 @@
 # EletroStore-Web
 Web pages developed in Vue.JS
 
-#Download the application and run
+#Download application and run
 cd eletrostore-web
+npm install
 npm run serve
-
-
 
 #Plus (Step by Step of all commands executed for the Frontend)
 npm install jquery
@@ -18,6 +17,7 @@ Ctrol+C
 After application running
 npm add axios
 npm add vue-router
+npm install bootstrap-vue bootstrap
 
 Add another port in the package.json, under "scripts" 
 	"serve": "vue-cli-service serve --port 8081"
@@ -25,4 +25,3 @@ Add another port in the package.json, under "scripts"
 npm cache clean --force
 npm install
 npm run serve
- 
