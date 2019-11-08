@@ -19,6 +19,9 @@ npm add axios
 npm add vue-router
 npm install bootstrap-vue bootstrap
 
+Added this dependency for images
+npm install --save vue-image-upload-resize
+
 Add another port in the package.json, under "scripts" 
 	"serve": "vue-cli-service serve --port 8081"
 	
