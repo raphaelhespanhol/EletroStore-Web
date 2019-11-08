@@ -20,6 +20,16 @@ const router = new Router({
       path: "/categories/:id",
       name: "CategoryDetails",
       component: () => import("./components/DetailsCategoryComponent")
+    },
+    {
+      path: "/products",
+      name: "Products",
+      component: () => import("./components/ProductComponent")
+    },
+    {
+      path: "/products/:id",
+      name: "ProductDetails",
+      component: () => import("./components/DetailsProductComponent")
     }
   ]
 });

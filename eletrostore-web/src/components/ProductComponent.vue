@@ -1,18 +1,18 @@
 <template>
     <div>
         <HomeApp></HomeApp>
-        <ListCategoryComponent></ListCategoryComponent>
+        <ListProductComponent></ListProductComponent>
     </div>
 </template>
 
 <script>
 import HomeApp from "./HomeApp";
-import ListCategoryComponent from "./ListCategoryComponent";
+import ListProductComponent from "./ListProductComponent";
 export default {
-    name: "CategoryComponent",
+    name: "ProductComponent",
     components: {
         HomeApp,
-        ListCategoryComponent
+        ListProductComponent
     }
 };
 </script>
