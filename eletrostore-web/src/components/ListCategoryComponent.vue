@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3>Todas as Categories</h3>
+    <h3>Cadastro de Categories</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
@@ -50,7 +50,7 @@ export default {
         });
     },
     newCategoryByClick() {
-      this.$router.push(`/categories/-1`);
+      this.$router.push(`/categories/0`);
     },
     saveCategoryByClick(id) {
       this.$router.push(`/categories/${id}`);
