@@ -109,7 +109,7 @@ export default {
               name: this.name,
               category: {id: this.id_category},
               price: this.price,
-              image: this.image
+              image: this.image.data
           })
           .then(() => {
               this.$router.push('/products');
@@ -120,7 +120,7 @@ export default {
               name: this.name,
               category: {id: this.id_category},
               price: this.price,
-              image: this.image
+              image: this.image.data
           })
           .then(() => {
               this.$router.push('/products');
