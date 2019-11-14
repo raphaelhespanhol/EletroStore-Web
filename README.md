@@ -17,7 +17,7 @@ Ctrol+C
 After application running
 npm add axios
 npm add vue-router
-npm install bootstrap-vue bootstrap
+npm install bootstrap-vue bootstrap moment
 
 Added this dependency for images
 npm install --save vue-image-upload-resize

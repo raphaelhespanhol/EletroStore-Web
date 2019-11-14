@@ -22,7 +22,7 @@
           <tr v-for="category in categories" v-bind:key="category.id">
             <td>{{category.id}}</td>
             <td>{{category.name}}</td>
-            <td>{{category.lastUpdate}}</td>
+            <td>{{category.lastUpdate | formatDate}}</td>
             <td><button class="btn btn-success" v-on:click="saveCategoryByClick(category.id)">Atualizar</button></td>
             <td><button class="btn btn-warning" v-on:click="deleteCategoryByClick(category.id)">Remover</button></td>
           </tr>
