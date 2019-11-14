@@ -14,8 +14,11 @@
                 <label>Descrição</label>
                 <input type="text" class="form-control" v-model="name" autofocus>
             </fieldset>
+          <div>
             <button class="btn btn-success" type="submit">Salvar</button>
-            <button class="btn" type="submit" @click.stop.prevent="returnCategoryList()">Voltar</button>
+            &nbsp;
+            <button class="btn btn-secondary" type="submit" @click.stop.prevent="returnCategoryList()">Voltar</button>
+          </div>  
         </form>
         </div>
   </div>

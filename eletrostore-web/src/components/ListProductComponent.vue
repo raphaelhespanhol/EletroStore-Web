@@ -1,24 +1,47 @@
 <template>
   <div class="container">
-    <h3>Cadastro de Products</h3>
+    <h3>Cadastro de Produtos</h3>
     <div v-if="message" class="alert alert-success">
       {{message}}
     </div>
     <div class="row">
-        <button class="btn btn-success" v-on:click="newProductByClick()">Novo</button>
-        <button class="btn btn-warning" v-on:click="exportByClick()">Emitir Relatório</button>
+      <div class="col-md-4">
+        <label>Descrição</label>
+        <input type="text" class="form-control" v-model="name" placeholder="Filtro por descrição" autofocus>
+      </div>
+      <div class="col-md-4">
+        <label>Categoria</label>
+        <select class="form-control" v-model="id_category">
+          <option>Todos</option>
+          <option v-for="category in categories" v-bind:key="category.id" v-bind:value="category.id">
+            {{category.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-9">
+          <button class="btn btn-primary mb-2" id="consultar" v-on:click="filterByClick()">Consultar</button>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-success" v-on:click="newProductByClick()">Novo</button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-info" v-on:click="exportByClick()">Emitir Relatório</button>
+        </div>
     </div>
     <div class="container">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th>Código</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Preço</th>
-            <th>Data alteração</th>
-            <th>Atualizar</th>
-            <th>Remover</th>
+            <th scope="col">Código</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Data alteração</th>
+            <th scope="col">Atualizar</th>
+            <th scope="col">Remover</th>
           </tr>
         </thead>
         <tbody>
@@ -38,17 +61,25 @@
 </template>
 
 <script>
+import CategoryService from '../services/CategoryService';
 import ProductService from '../services/ProductService';
 export default {
   name: "ProductList",
   data() {
     return {
+      name: "",
+      id_category: "Todos",
       products: [],
-      message: null
+      message: null,
+      categories: []
     };
   },
   methods: {
     refreshProducts() {
+      CategoryService.retrieveAll()
+      .then(response => {
+        this.categories = response.data;
+      });
       ProductService.retrieveAll()
         .then(response => {
           this.products = response.data;
@@ -65,7 +96,7 @@ export default {
     },
     deleteProductByClick(id) {
       ProductService.deleteById(id)
-        .then(response => { 
+        .then(() => { 
           this.message = `Produto numero ${id} apagada com sucesso!`;
           this.refreshProducts();
       });

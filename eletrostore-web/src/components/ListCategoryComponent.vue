@@ -8,14 +8,14 @@
         <button class="btn btn-success" v-on:click="newCategoryByClick()">Novo</button>
     </div>
     <div class="container">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th>Código</th>
-            <th>Descrição</th>
-            <th>Data alteração</th>
-            <th>Atualizar</th>
-            <th>Remover</th>
+            <th scope="col">Código</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Data alteração</th>
+            <th scope="col">Atualizar</th>
+            <th scope="col">Remover</th>
           </tr>
         </thead>
         <tbody>
@@ -57,7 +57,7 @@ export default {
     },
     deleteCategoryByClick(id) {
       CategoryService.deleteById(id)
-        .then(response => { 
+        .then(() => { 
           this.message = `Categoria numero ${id} apagada com sucesso!`;
           this.refreshCategories();
       });

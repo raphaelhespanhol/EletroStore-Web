@@ -44,8 +44,11 @@
                   <span class="upload-caption">{{ hasImage ? "Alterar imagem" : "Adicionar imagem" }}</span>
                 </label>
               </image-uploader>
-            <button class="btn btn-success" type="submit">Salvar</button>
-            <button class="btn" type="submit" @click.stop.prevent="returnProductList()">Voltar</button>
+            <div>
+              <button class="btn btn-success" type="submit">Salvar</button>
+              &nbsp;
+              <button class="btn btn-secondary" type="submit" @click.stop.prevent="returnProductList()">Voltar</button>
+            </div>
         </form>
         </div>
   </div>
