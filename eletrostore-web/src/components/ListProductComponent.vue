@@ -6,6 +6,7 @@
     </div>
     <div class="row">
         <button class="btn btn-success" v-on:click="newProductByClick()">Novo</button>
+        <button class="btn btn-warning" v-on:click="exportByClick()">Emitir Relatório</button>
     </div>
     <div class="container">
       <table class="table">
@@ -25,7 +26,7 @@
             <td>{{product.id}}</td>
             <td>{{product.name}}</td>
             <td>{{product.category.name}}</td>
-            <td>{{product.price}}</td>
+            <td>R$ {{formatPrice(product.price)}}</td>
             <td>{{product.lastUpdate | formatDate}}</td>
             <td><button class="btn btn-success" v-on:click="saveProductByClick(product.id)">Atualizar</button></td>
             <td><button class="btn btn-warning" v-on:click="deleteProductByClick(product.id)">Remover</button></td>
@@ -56,6 +57,9 @@ export default {
     newProductByClick() {
       this.$router.push(`/products/0`);
     },
+    exportByClick() {
+      console.log("Export result..");
+    },
     saveProductByClick(id) {
       this.$router.push(`/products/${id}`);
     },
@@ -65,6 +69,10 @@ export default {
           this.message = `Produto numero ${id} apagada com sucesso!`;
           this.refreshProducts();
       });
+    },
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     }
   },
   created() {

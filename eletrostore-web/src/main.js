@@ -4,9 +4,11 @@ import router from "./routes";
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import ImageUploader from 'vue-image-upload-resize';
+import ImageUploader from "vue-image-upload-resize";
 import Moment from 'moment';
+import money from 'v-money';
 
+Vue.use(money, {precision: 4});
 Vue.use(ImageUploader);
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;

@@ -24,7 +24,7 @@
             </fieldset>
             <fieldset class="form-group">
                 <label>Preço</label>
-                <input type="text" class="form-control" v-model="price">
+                <money v-bind="money" class="form-control" v-model="price"></money>
             </fieldset>
               <image-uploader
                 :preview="true"
@@ -54,11 +54,23 @@
 <script>
 import CategoryService from '../services/CategoryService';
 import ProductService from '../services/ProductService';
+import {Money} from 'v-money';
 export default {
   name: "DetailsProductComponent",
+  components: {Money},
   data() {
     return {
       name: "",
+      id_category: 0,
+      price: 0.00,
+      money: {
+        decimal: ',',
+        thousands: '.',
+        prefix: 'R$ ',
+        suffix: '',
+        precision: 2,
+        masked: false
+      },
       hasImage: false,
       image: null,
       errors: [],
@@ -81,7 +93,7 @@ export default {
           this.name = res.data.name;
           this.id_category = res.data.category.id;
           this.price = res.data.price;
-          this.setImage('data:image/jpeg;base64,' + atob(res.data.image));
+          this.setImage({dataUrl: atob(res.data.image), info: null});//decode image
         });
       }
     },
@@ -89,20 +101,20 @@ export default {
       e.preventDefault();
       this.errors = [];
       if(!this.name) {
-        this.errors.push("Entre com o valor no nome");
+        this.errors.push("Entre com o valor no campo descrição");
       } else if(this.name.length < 5) {
-        this.errors.push("O campo nome deve conter mais de 5 caracter!");
+        this.errors.push("O campo descrição deve conter mais de 5 caracteres!");
       }
 
       if(this.errors.length === 0) {
-        console.log("image: " + this.image);
+        console.log("image: " + this.image.dataUrl);
           
         if (this.id == 0) {
           ProductService.create({
               name: this.name,
               category: {id: this.id_category},
               price: this.price,
-              image: btoa(this.image)
+              image: btoa(this.image.dataUrl)//encode image
           })
           .then(() => {
               this.$router.push('/products');
@@ -113,7 +125,7 @@ export default {
               name: this.name,
               category: {id: this.id_category},
               price: this.price,
-              image: btoa(this.image)
+              image: btoa(this.image.dataUrl)//encode image
           })
           .then(() => {
               this.$router.push('/products');
