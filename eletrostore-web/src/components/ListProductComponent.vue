@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-4">
         <label>Descrição</label>
-        <input type="text" class="form-control" v-model="name" placeholder="Filtro por descrição" autofocus>
+        <input type="text" class="form-control" v-model="name" placeholder="Filtrar pelo campo descrição" autofocus>
       </div>
       <div class="col-md-4">
         <label>Categoria</label>
@@ -45,14 +45,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in products" v-bind:key="product.id">
-            <td>{{product.id}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.category.name}}</td>
-            <td>R$ {{formatPrice(product.price)}}</td>
-            <td>{{product.lastUpdate | formatDate}}</td>
-            <td><button class="btn btn-success" v-on:click="saveProductByClick(product.id)">Atualizar</button></td>
-            <td><button class="btn btn-warning" v-on:click="deleteProductByClick(product.id)">Remover</button></td>
+          <tr v-for="product in products" v-bind:key="product[0]">
+            <td>{{product[0]}}</td>
+            <td>{{product[1]}}</td>
+            <td>{{product[2]}}</td>
+            <td>R$ {{formatPrice(product[3])}}</td>
+            <td>{{product[4] | formatDate}}</td>
+            <td><button class="btn btn-success" v-on:click="saveProductByClick(product[0])">Atualizar</button></td>
+            <td><button class="btn btn-warning" v-on:click="deleteProductByClick(product[0])">Remover</button></td>
           </tr>
         </tbody>
       </table>
@@ -80,7 +80,7 @@ export default {
       .then(response => {
         this.categories = response.data;
       });
-      ProductService.retrieveAll()
+      ProductService.retrieveAllWithoutImages()
         .then(response => {
           this.products = response.data;
         });

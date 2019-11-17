@@ -8,6 +8,10 @@ class ProductService {
     retrieveAll() {
         return axios.get(`${PRODUCT_API_URL}`);
     }
+    retrieveAllWithoutImages() {
+        return axios.get(`${PRODUCT_API_URL}/findAllWithoutImages`);
+    }
+    
     retrieveById(id) {
         return axios.get(`${PRODUCT_API_URL}/${id}`);
     }
