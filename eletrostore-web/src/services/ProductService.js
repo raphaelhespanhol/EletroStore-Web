@@ -11,7 +11,15 @@ class ProductService {
     retrieveAllWithoutImages() {
         return axios.get(`${PRODUCT_API_URL}/findAllWithoutImages`);
     }
-    
+    retrieveAllByName(name) {
+        return axios.get(`${PRODUCT_API_URL}/findAllByName/${name}`);
+    }
+    retrieveAllByCategoryId(categoryId) {
+        return axios.get(`${PRODUCT_API_URL}/findAllByCategoryId/${categoryId}`);
+    }
+    retrieveAllByNameAndCategoryId(name, categoryId) {
+        return axios.get(`${PRODUCT_API_URL}/findAllByNameAndCategoryId/${name}/${categoryId}`);
+    }
     retrieveById(id) {
         return axios.get(`${PRODUCT_API_URL}/${id}`);
     }

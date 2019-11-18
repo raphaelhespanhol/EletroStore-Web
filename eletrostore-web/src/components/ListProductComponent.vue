@@ -11,7 +11,7 @@
       </div>
       <div class="col-md-4">
         <label>Categoria</label>
-        <select class="form-control" v-model="id_category">
+        <select class="form-control" v-model="categoryName">
           <option>Todos</option>
           <option v-for="category in categories" v-bind:key="category.id" v-bind:value="category.id">
             {{category.name}}
@@ -22,7 +22,7 @@
     
     <div class="row">
         <div class="col-md-9">
-          <button class="btn btn-primary mb-2" id="consultar" v-on:click="filterByClick()">Consultar</button>
+          <button class="btn btn-primary mb-2" id="consultar" v-on:click="refreshProducts()">Consultar</button>
         </div>
         <div class="col-md-1">
           <button class="btn btn-success" v-on:click="newProductByClick()">Novo</button>
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       name: "",
-      id_category: "Todos",
+      categoryName: "Todos",
       products: [],
       message: null,
       categories: []
@@ -80,10 +80,27 @@ export default {
       .then(response => {
         this.categories = response.data;
       });
-      ProductService.retrieveAllWithoutImages()
+      if (this.name != "" && this.categoryName == "Todos"){
+        ProductService.retrieveAllByName(this.name)
         .then(response => {
           this.products = response.data;
         });
+      } else if (this.name == "" && this.categoryName != "Todos"){
+        ProductService.retrieveAllByCategoryId(this.categoryName)
+        .then(response => {
+          this.products = response.data;
+        });
+      } else if (this.name != "" && this.categoryName != "Todos"){
+      ProductService.retrieveAllByNameAndCategoryId(this.name, this.categoryName)
+        .then(response => {
+          this.products = response.data;
+        });
+      } else {
+        ProductService.retrieveAllWithoutImages()
+        .then(response => {
+          this.products = response.data;
+        });
+      }
     },
     newProductByClick() {
       this.$router.push(`/products/0`);
