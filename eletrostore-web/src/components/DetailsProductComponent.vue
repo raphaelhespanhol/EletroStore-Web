@@ -111,10 +111,21 @@ export default {
     validateAndSubmit(e) {
       e.preventDefault();
       this.errors = [];
+      if(!this.id_category) {
+        this.errors.push("Selecione uma categoria válida!");
+      }
       if(!this.name) {
         this.errors.push("Entre com o valor no campo descrição");
       } else if(this.name.length < 5) {
         this.errors.push("O campo descrição deve conter mais de 5 caracteres!");
+      }
+      if(!this.price) {
+        this.errors.push("Adicione um preço ao produto acima de 1 centavo");
+      }
+      if(!this.image) {
+        this.errors.push("Faça upload de uma imagem até 1MB");
+      } else if (this.image.size > 1024 * 1024) {
+        this.errors.push("Sua imagem está ultrapassando o limite de 1MB permitido! Verifique novamente");
       }
 
       if(this.errors.length === 0) {
@@ -148,7 +159,7 @@ export default {
       console.log("Output = " + output.dataUrl);
       this.hasImage = true;
       this.image = output;
-      if (null == this.saved.image){
+      if (null == this.saved.image && this.id != 0){
         this.saved.image = output.dataUrl;
         this.saved.imageUrl = output.dataUrl;
       }
