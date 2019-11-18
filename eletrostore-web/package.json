@@ -12,6 +12,8 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.4",
     "core-js": "^3.3.2",
+    "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.2.11",
     "moment": "^2.24.0",
     "v-money": "^0.8.1",
     "vue": "^2.6.10",

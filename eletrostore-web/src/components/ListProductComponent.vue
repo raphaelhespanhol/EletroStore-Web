@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="container">
-      <table class="table table-hover">
+      <table id="productTable" class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Código</th>
@@ -63,6 +63,9 @@
 <script>
 import CategoryService from '../services/CategoryService';
 import ProductService from '../services/ProductService';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 export default {
   name: "ProductList",
   data() {
@@ -106,7 +109,10 @@ export default {
       this.$router.push(`/products/0`);
     },
     exportByClick() {
-      console.log("Export result..");
+      console.log("Exporting results ...");
+      const doc = new jsPDF();
+      doc.autoTable({html: '#productTable'});
+      doc.save('products.pdf');
     },
     saveProductByClick(id) {
       this.$router.push(`/products/${id}`);

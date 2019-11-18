@@ -20,6 +20,7 @@ npm add vue-router
 npm install bootstrap-vue bootstrap moment
 npm install --save v-money
 npm i -S vue-the-mask
+npm install jspdf jspdf-autotable
 
 Added this dependency for images
 npm install --save vue-image-upload-resize
