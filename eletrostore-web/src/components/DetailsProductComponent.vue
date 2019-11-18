@@ -26,12 +26,16 @@
                 <label>Preço</label>
                 <money v-bind="money" class="form-control" v-model="price"></money>
             </fieldset>
+              <div id="preview">
+                <img v-if="saved.imageUrl" :src="saved.imageUrl" width="200"/>
+              </div>
               <image-uploader
                 :preview="true"
                 :className="['fileinput', { 'fileinput--loaded': hasImage }]"
                 capture="environment"
                 :debug="1"
-                doNotResize="gif"
+                accept="image/*"
+                doNotResize="['gif', 'svg']"
                 :autoRotate="true"
                 outputFormat="verbose"
                 @input="setImage"
@@ -76,6 +80,10 @@ export default {
       },
       hasImage: false,
       image: null,
+      saved:{
+          image : null,
+          imageUrl: null
+      },
       errors: [],
       categories: []
     };
@@ -137,9 +145,13 @@ export default {
       }
     },
     setImage: function(output) {
-      console.log(output);
+      console.log("Output = " + output.dataUrl);
       this.hasImage = true;
       this.image = output;
+      if (null == this.saved.image){
+        this.saved.image = output.dataUrl;
+        this.saved.imageUrl = output.dataUrl;
+      }
     },
     returnProductList() {
       this.$router.push("/products");
